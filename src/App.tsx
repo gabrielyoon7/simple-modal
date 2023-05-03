@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Modal from "./lib/Modal";
 
 function App() {
+  const [isOpen,setOpen] = useState(false);
   return (
     <div className="App">
       <header className="App-header">
@@ -18,7 +20,11 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={()=>setOpen(true)}>모달 열기</button>
       </header>
+      <Modal modalOpen={isOpen}>
+        <div>하이</div>
+      </Modal>
     </div>
   );
 }
