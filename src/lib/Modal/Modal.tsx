@@ -1,8 +1,10 @@
 import { ReactNode } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 const ModalContainer = styled.div`
-  display: block;
+  display: flex;
+  justify-content: center;
 `;
 
 const ModalBackDrop = styled.div`
@@ -13,6 +15,7 @@ const ModalBackDrop = styled.div`
   left: 0;
   background: rgba(0, 0, 0, 0.35);
 `;
+
 const ModalContent = styled.div`
   position: fixed;
   bottom: 0;
@@ -27,17 +30,18 @@ interface ModalProps {
   closeModal?: () => void;
   children: ReactNode;
 }
+
 function Modal({ modalOpen, closeModal, children }: ModalProps) {
-  return (
-    <>
-      {modalOpen && (
-        <ModalContainer>
-          <ModalBackDrop onClick={closeModal} />
-          <ModalContent>{children}</ModalContent>
-        </ModalContainer>
-      )}
-      <div />
-    </>
+  if (!modalOpen) {
+    return null;
+  }
+
+  return ReactDOM.createPortal(
+    <ModalContainer>
+      <ModalBackDrop onClick={closeModal} />
+      <ModalContent>{children}</ModalContent>
+    </ModalContainer>,
+    document.body,
   );
 }
 
