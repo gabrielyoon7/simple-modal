@@ -4,5 +4,5 @@ interface ModalProps {
     closeModal?: () => void;
     children: ReactNode;
 }
-declare function Modal({ modalOpen, closeModal, children }: ModalProps): JSX.Element;
+declare function Modal({ modalOpen, closeModal, children }: ModalProps): import("react").ReactPortal | null;
 export default Modal;
